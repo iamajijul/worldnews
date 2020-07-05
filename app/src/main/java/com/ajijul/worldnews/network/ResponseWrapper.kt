@@ -1,14 +1,18 @@
 package com.ajijul.worldnews.network
 
-sealed class ResponseWrapper<T>(
-    val data: T? = null,
-    val message: String? = null
+sealed class ResponseWrapper<out T> {
 
-) {
+    data class Success<T>(
+        val data: T? = null,
+        val message: String? = null
 
+    ) : ResponseWrapper<T>()
 
-    class Success<T>(data: T) : ResponseWrapper<T>(data)
-    class Error<T>(message: String?, data: T?) : ResponseWrapper<T>(data, message)
-    class Loading<T> : ResponseWrapper<T>()
+    data class Error(
+        var message: String? = null,
+        var code: Int? = null
+    ) : ResponseWrapper<Nothing>()
+
+    class Loading : ResponseWrapper<Nothing>()
 
 }

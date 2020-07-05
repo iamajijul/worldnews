@@ -25,7 +25,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsViewHolders>() {
 
     }
 
-    private var differList = AsyncListDiffer(this, differCallBack)
+
+    var differList = AsyncListDiffer(this, differCallBack)
     private var onItemClickListener: ((Article) -> Unit)? = null
 
     fun setOnClickListener(listener: ((Article) -> Unit)?) {
